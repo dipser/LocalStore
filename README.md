@@ -1,0 +1,4 @@
+LocalStore
+==========
+
+Mini localStorage Klasse
