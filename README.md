@@ -31,4 +31,4 @@ Eine mini localStorage Hülle.
 <br />
 ---
 ### Autor
-Aurel *'[dipser](http://girhub.com/dipser)'* Hermand
+Aurel *'[dipser](http://github.com/dipser)'* Hermand
