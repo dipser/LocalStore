@@ -1,10 +1,18 @@
 LocalStore
 ==========
 
-Mini localStorage Klasse
+Eine mini localStorage Hülle. 
 
 
+<br />
+### Funktionen
+* Reduzierte Schreibarbeit *...ultrafast!*
+* Wunderbar einfache Syntax!
+* Namensräume mit Prefix!
+* Ablaufzeiten für alle und für einzelne Daten!
+* Es rockt!
 
+<br />
 ###Benutzung
 
 ```
