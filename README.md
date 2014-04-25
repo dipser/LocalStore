@@ -1,6 +1,2 @@
-LocalStore
+LocalStore Webseite
 ==========
-
-Mini localStorage Klasse
-
-in development / in entwicklung
