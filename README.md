@@ -13,7 +13,7 @@ Eine mini localStorage Hülle.
 * Es rockt!
 
 <br />
-###Benutzung
+### Benutzung
 
 ```
 <script src="LocalStore.js"></script>
@@ -30,5 +30,5 @@ Eine mini localStorage Hülle.
 
 <br />
 ---
-##### Author
-Aurel *'dipser'* Hermand
+### Autor
+Aurel *'[dipser](http://girhub.com/dipser)'* Hermand
