@@ -1,58 +1,76 @@
 /**
  * JS-Local-Storage Wrapper
  *
+ *
+ * Beispiel:
+ *
+ * <script src="res/js/LocalStore.js"></script>
+ * <script>
+ *   // Starten des localStorage mit Namensraum 'myStore' und der optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.
+ *   var myStore = LocalStore.init('mystore', {time: 60*60*24, prefix: 'LocalStore'});
+ *   myStore.set('id', 1);
+ *   myStore.set('name', 'aurel');
+ *   myStore.remove('name');
+ *   console.log(myStore.get('name'));
+ *   myStore.clear(); // Löscht alles aus dem Namensraum 'mystore'
+ * </script>
+ *
+ *
  * @author Aurel Hermand, aurel@hermand.de
- * @version 1.0 - Initial version
+ * @version 1.0 - 25.04.2014 - Initial version
+ *
  */
 
 
 var LocalStore = {
-	//url: '', // Automatic Data from url
 
+	prefix: '',
 	name: null, // Name-Postfix für den localStorage-Index
-	time: null, // Standardlöschzeit, wenn keine gesetzt wurde. null=permanent
+	time: null, // Ablaufzeit-Standard für localStorage-Items. null=permanent
 
-	init: function(name=null) {
+	init: function(name, options) {
 		this.name = name;
-		var index = JSON.parse(localStorage.get('LocalStoreIndex-'+this.name));
+		this.prefix = options && 'prefix' in options ? options.prefix : '';
+		this.time = options && 'time' in options ? options.time : null;
+		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || [];
+		localStorage.setItem(this.prefix+'Index-'+this.name, JSON.stringify(index));
 		for (var i in index) {
-			var lsii = localStorage.get(index[i]);
-			if (this._dateNow()+lssi.time < lssi.setTime) {
-				this.removeItem(index[i]);
+			var item = JSON.parse(localStorage.getItem(this.prefix+'Item-'+this.name+'-'+index[i]));
+			var time = (item && 'time' in item && 'setTime' in item) ? item.time : this.time;
+			if (time && item.setTime + time > this._dateNow()) {
+				this.remove(index[i]);
 			}
 		}
-		// ...LOAD URL DATA HERE...
 		return this;
-	},
-
-	refresh: function() {
-		// ...REFRESH URL DATA HERE...
-	},
-
-	clear: function() {
-		var index = JSON.parse(localStorage.getItem('LocalStoreIndex-'+this.name)); // [key1, key2,...]
-		for (var i in index) {localStorage.removeItem(index[i]);}
-		localStorage.removeItem('LocalStoreIndex-'+this.name);
-	},
-
-	removeItem: function(key){this.remove(key);},
-	remove: function(key){
-		var index = JSON.parse(localStorage.getItem('LocalStoreIndex-'+this.name)); // [key1, key2,...]
-		for (var i in index) {if (index[i]==key) {delete index[i];}}
-		localStorage.removeItem(key);
 	},
 
 	getItem: function(key){this.get(key);},
 	get: function(key) {
-		return JSON.parse(localStorage.get(key)).data;
+		return JSON.parse(localStorage.getItem(this.prefix+'Item-'+this.name+'-'+key)).data;
 	},
 
-	setItem: function(key, val, time=0, url=null){this.get(key, val, time, url);},
-	set: function(key, val, time=0, url=null) {
-		var index = JSON.parse(localStorage.getItem('LocalStoreIndex-'+this.name));
-		index.push(key);
-		localStorage.setItem('LocalStoreIndex-'+this.name, JSON.stringify(index));
-		localStorage.set(key, {data:JSON.stringify(val), setTime:this._dateNow(), time:time, url:url});
+	setItem: function(key, val, time, url){this.get(key, val, time, url);},
+	set: function(key, val, time, url) {
+		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || [];
+		if (index.indexOf(key) === -1) { index.push(key); }
+		localStorage.setItem(this.prefix+'Index-'+this.name, JSON.stringify(index));
+		localStorage.setItem(this.prefix+'Item-'+this.name+'-'+key, JSON.stringify({data:val, setTime:this._dateNow(), time:time, url:url}));
+	},
+
+	removeItem: function(key){this.remove(key);},
+	remove: function(key){
+		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || []; // [key1, key2,...]
+		if (index.indexOf(key) !== -1) {
+			index = index.splice(key, 1);
+			localStorage.setItem(this.prefix+'Index-'+this.name, JSON.stringify(index));
+		}
+		localStorage.removeItem(this.prefix+'Item-'+this.name+'-'+key);
+	},
+
+	clear: function() {
+		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || []; // [key1, key2,...]
+		for (var i in index) {localStorage.removeItem(this.prefix+'Item-'+this.name+'-'+index[i]);}
+		localStorage.removeItem(this.prefix+'Index-'+this.name);
 	},
 
 	_dateNow: function() {
@@ -60,23 +78,5 @@ var LocalStore = {
 	}
 };
 
-
-
-var myStore = LocalStore.init('mystore');
-myStore.set('id', 1);
-myStore.get('id');
-
-
-/*
-var myStore = LocalStore({
-	url: 'http://www.host.de/data.json',
-	param: {},
-	type: 'jsonp', // json, jsonp, xml, plain
-
-	data: '',
-
-	store: 3600*24
-});
-*/
 
 
