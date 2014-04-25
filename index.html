@@ -42,11 +42,11 @@
   <span class="c">// Starten des localStorage mit Namensraum 'mystore' und der </span>
   <span class="c">// optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.</span>
   var store = <span class="gs">LocalStore.init</span>('mystore', {time: 60*60*24, prefix: 'LocalStore'});
-  store.<strong>set</strong>('id', 1);
+  store.<span class="gs">set</span>('id', 1);
   store.set('name', 'aurel');
-  store.<strong>remove</strong>('name');
-  console.log(store.<strong>get</strong>('name'));
-  store.<strong>clear</strong>(); // Löscht alles aus dem Namensraum 'mystore'
+  store.<span class="gs">remove</span>('name');
+  console.log(store.<span class="gs">get</span>('name'));
+  store.<span class="gs">clear</span>(); <span class="c">// Löscht alles aus dem Namensraum 'mystore'</span>
 &lt;/script&gt;
 </code></pre>
 
