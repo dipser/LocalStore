@@ -49,12 +49,12 @@ var LocalStore = {
 		return JSON.parse(localStorage.getItem(this.prefix+'Item-'+this.name+'-'+key)).data;
 	},
 
-	setItem: function(key, val, time, url){this.get(key, val, time, url);},
-	set: function(key, val, time, url) {
+	setItem: function(key, val, time){this.get(key, val, time);},
+	set: function(key, val, time) {
 		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || [];
 		if (index.indexOf(key) === -1) { index.push(key); }
 		localStorage.setItem(this.prefix+'Index-'+this.name, JSON.stringify(index));
-		localStorage.setItem(this.prefix+'Item-'+this.name+'-'+key, JSON.stringify({data:val, setTime:this._dateNow(), time:time, url:url}));
+		localStorage.setItem(this.prefix+'Item-'+this.name+'-'+key, JSON.stringify({data:val, setTime:this._dateNow(), time:time}));
 	},
 
 	removeItem: function(key){this.remove(key);},
@@ -68,7 +68,7 @@ var LocalStore = {
 	},
 
 	clear: function() {
-		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || []; // [key1, key2,...]
+		var index = JSON.parse(localStorage.getItem(this.prefix+'Index-'+this.name)) || [];
 		for (var i in index) {localStorage.removeItem(this.prefix+'Item-'+this.name+'-'+index[i]);}
 		localStorage.removeItem(this.prefix+'Index-'+this.name);
 	},
