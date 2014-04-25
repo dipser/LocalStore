@@ -17,7 +17,8 @@ Eine mini localStorage Hülle.
 ```
 <script src="LocalStore.js"></script>
 <script>
-  // Starten des localStorage mit Namensraum 'mystore' und der optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.
+  // Starten des localStorage mit Namensraum 'mystore' und der 
+  // optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.
   var store = LocalStore.init('mystore', {time: 60*60*24, prefix: 'LocalStore'});
   store.set('id', 1);
   store.set('name', 'aurel');
