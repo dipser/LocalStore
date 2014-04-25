@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="utf-8" />
-        <title>LocalStore</title>
-    </head>
-    <body>
-    
-      <h1>LocalStore</h1>
-        
-    </body>
+<head>
+	<meta charset="utf-8" />
+	<title>LocalStore</title>
+	<script src="LocalStore.js"></script>
+	<script>
+		// Starten des localStorage mit Namensraum 'myStore' und der optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.
+		var myStore = LocalStore.init('mystore', {time: 60*60*24, prefix: 'LocalStore'});
+		myStore.set('id', 1);
+		myStore.set('name', 'aurel');
+		myStore.remove('name');
+		console.log(myStore.get('name'));
+		myStore.clear(); // Löscht alles aus dem Namensraum 'mystore'
+	</script>
+</head>
+<body>
+
+
+	<div>Hallo, bitte schaue im Entwickler-Tool des Browsers nach Local Storage dem Ergebnis.<br /> -- <a href="https://github.com/dipser/LocalStore">LocalStore</a> by <a href="https://github.com/dipser">dipser</a></div>
+
+       
+</body>
 </html>
