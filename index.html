@@ -37,11 +37,11 @@
   </ul>
 </p>
 
-<pre><code>&lt;script src="LocalStore.js"&gt;&lt;/script&gt;
+<pre><code class="highlight">&lt;script src="LocalStore.js"&gt;&lt;/script&gt;
 &lt;script&gt;
-  // Starten des localStorage mit Namensraum 'mystore' und der 
-  // optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.
-  var store = <strong>LocalStore.init</strong>('mystore', {time: 60*60*24, prefix: 'LocalStore'});
+  <span class="c">// Starten des localStorage mit Namensraum 'mystore' und der </span>
+  <span class="c">// optionalen Angabe einer Standard-Ablaufzeit und eines Prefixes.</span>
+  var store = <span class="gs">LocalStore.init</span>('mystore', {time: 60*60*24, prefix: 'LocalStore'});
   store.<strong>set</strong>('id', 1);
   store.set('name', 'aurel');
   store.<strong>remove</strong>('name');
