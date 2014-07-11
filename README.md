@@ -6,9 +6,10 @@ Eine mini localStorage Hülle.
 
 <br />
 ### Funktionen
-* Kürzere Befehle! *...Reduktion!*
-* Namensräume! *...auch mit Prefixen!*
-* Ablaufzeiten! *...für alle und einzelne!*
+* Kürzere Befehl *...Reduktion!*
+* Namensräume *...auch mit Prefixen!*
+* Ablaufzeiten *...für alle und einzelne!*
+* Listener Integration *...Experimentell!*
 * *Es rockt!*
 
 <br />
