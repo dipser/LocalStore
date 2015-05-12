@@ -1,3 +1,5 @@
+[![Gittip](http://img.shields.io/gratipay/dipser.svg)](https://gratipay.com/dipser/)
+
 LocalStore
 ==========
 
